@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Details</title>
+  <link rel="shortcut icon" href="./image/favicon.jpg" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .glass{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08)}
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-gray-100">
+  <header class="sticky top-0 z-40 glass">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html#services" class="inline-flex items-center gap-2 text-sm text-gray-200 hover:text-white">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Services</span>
+      </a>
+      <h1 class="text-lg font-semibold">Service Details</h1>
+      <div></div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-10" id="content">
+    <div id="loading" class="text-center text-gray-300">Loading...</div>
+  </main>
+
+  <footer class="py-10 text-center text-gray-400">
+    <p class="text-sm">&copy; 2025 Imon Chowdhury</p>
+  </footer>
+
+  <script src="./services.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    const data = window.Services?.byId(id);
+
+    const root = document.getElementById('content');
+    const loading = document.getElementById('loading');
+    loading?.remove();
+
+    if(!data){
+      root.innerHTML = `
+        <div class="max-w-3xl mx-auto glass rounded-xl p-8">
+          <h2 class="text-2xl font-semibold mb-2">Service not found</h2>
+          <p class="text-gray-300 mb-6">The service you are looking for does not exist or the link is invalid.</p>
+          <a href="index.html#services" class="inline-flex items-center gap-2 bg-primary-600 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md">
+            <i class="fa-solid fa-arrow-left"></i> Back to Services
+          </a>
+        </div>`;
+    } else {
+      root.innerHTML = `
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2">
+            <div class="overflow-hidden rounded-2xl shadow-xl">
+              <img src="${data.image}" alt="${data.title}" class="w-full h-72 object-cover">
+            </div>
+            <div class="mt-6 glass rounded-2xl p-6">
+              <h2 class="text-2xl font-bold mb-3">${data.title}</h2>
+              <p class="text-gray-300">${data.description}</p>
+              <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                ${data.features.map(f=>`<li class=\"flex items-center gap-2\"><i class=\"fa-solid fa-check text-emerald-400\"></i><span>${f}</span></li>`).join('')}
+              </ul>
+            </div>
+          </div>
+          <aside class="space-y-6">
+            <div class="glass rounded-2xl p-6">
+              <div class="flex items-center justify-between">
+                <span class="px-2 py-1 text-xs rounded-full bg-blue-600/80">${data.badge}</span>
+                <span class="text-yellow-400"><i class="fa-solid fa-star"></i> ${data.rating} <span class="text-gray-400">(${data.reviews})</span></span>
+              </div>
+              <div class="mt-4">
+                <p class="text-gray-300">Starting at</p>
+                <p class="text-3xl font-bold">$${data.price}</p>
+              </div>
+              <div class="mt-4 text-sm text-gray-300">Estimated delivery: <strong class="text-white">${data.delivery}</strong></div>
+              <a href="https://wa.me/8801875349813?text=Hi%20Imon%2C%20I%27m%20interested%20in%20your%20web%20development%20services." target="_blank" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-md">
+                <i class="fab fa-whatsapp"></i> Contact to Order
+              </a>
+            </div>
+            <div class="glass rounded-2xl p-6">
+              <h3 class="font-semibold mb-3">What you get</h3>
+              <ul class="space-y-2 text-gray-300 text-sm">
+                <li class="flex gap-2"><i class="fa-solid fa-shield-halved text-blue-400 mt-1"></i> Secure & optimized build</li>
+                <li class="flex gap-2"><i class="fa-solid fa-mobile-screen-button text-blue-400 mt-1"></i> Mobile-first responsive design</li>
+                <li class="flex gap-2"><i class="fa-solid fa-headset text-blue-400 mt-1"></i> 7 days free support after delivery</li>
+              </ul>
+            </div>
+          </aside>
+        </section>
+      `;
+    }
+  </script>
+</body>
+</html>
