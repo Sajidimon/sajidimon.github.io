@@ -248,8 +248,8 @@
             }
         }
     </script>
-    <!-- Swiper JS for slider -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<!-- Swiper JS for slider -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 
 <body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-gray-100 font-sans antialiased">
@@ -724,10 +724,19 @@
         <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900/60 via-blue-900/20 to-gray-900/60"></div>
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-16 gradient-text">My Contribution</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Filter Controls -->
+            <div id="project-filters" class="flex flex-wrap items-center justify-center gap-3 mb-8">
+                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="all">All</button>
+                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="shopify">Shopify App</button>
+                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="laravel">Laravel</button>
+                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="wordpress">WordPress</button>
+                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="html">HTML</button>
+                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="javascript">JavaScript</button>
+            </div>
 
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 4 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate>
+                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="shopify,laravel,php,graphql">
                     <div class="project-overlay absolute inset-0 pointer-events-none"></div>
                     <span
                         class="absolute top-3 left-3 z-10 px-2 py-1 text-xs rounded-full bg-yellow-400/90 text-black font-semibold">Featured</span>
@@ -752,7 +761,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate>
+                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="laravel,php,mysql,bootstrap">
                     <div class="project-overlay absolute inset-0 pointer-events-none"></div>
                     <img src="./image/funnel.jpg" alt="Project 3" class="w-full h-48 object-cover">
                     <div class="project-content p-6">
@@ -775,7 +784,7 @@
                 </div>
 
                 <!-- Project 1 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate>
+                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="wordpress,elementor,css">
                     <div class="project-overlay absolute inset-0 pointer-events-none"></div>
                     <img src="./image/ecommerce.webp" alt="Project 1" class="w-full h-48 object-cover">
                     <div class="project-content p-6">
@@ -797,7 +806,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate>
+                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="html,css,javascript,tailwind">
                     <div class="project-overlay absolute inset-0 pointer-events-none"></div>
                     <img src="./image/envoydigital.jpg" alt="Project 2" class="w-full h-48 object-cover">
                     <div class="project-content p-6">
@@ -883,7 +892,15 @@
                     </div>
                 </div>
                 <div class="md:w-1/2 md:pl-2">
-                    <form class="space-y-6 glass-effect rounded-2xl p-8">
+                    <form id="contactForm" class="space-y-6 glass-effect rounded-2xl p-8">
+                        <!-- FormSubmit config -->
+                        <input type="hidden" name="_subject" value="New message from portfolio contact form">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="box">
+                        <!-- Optional: redirect after submit -->
+                        <input type="hidden" name="_next" value="https://sajidimon.github.io/#contact">
+                        <!-- Honeypot field to reduce spam -->
+                        <input type="text" name="_honey" style="display:none">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="name" class="block text-sm font-medium mb-1">Name</label>
@@ -1114,6 +1131,42 @@
                 }
             });
         }
+
+        // Projects Filtering
+        (function initProjectFilters() {
+            const filterBar = document.getElementById('project-filters');
+            const grid = document.getElementById('projects-grid');
+            if (!filterBar || !grid) return;
+
+            const buttons = filterBar.querySelectorAll('[data-filter]');
+            const cards = Array.from(grid.querySelectorAll('.project-card'));
+
+            const setActive = (btn) => {
+                buttons.forEach(b => b.classList.remove('bg-primary', 'text-white'));
+                btn.classList.add('bg-primary', 'text-white');
+            };
+
+            const applyFilter = (key) => {
+                const k = key.toLowerCase();
+                cards.forEach(card => {
+                    const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+                    const match = k === 'all' || tags.split(',').map(s => s.trim()).includes(k);
+                    card.style.display = match ? '' : 'none';
+                });
+            };
+
+            // Default active = All
+            const defaultBtn = filterBar.querySelector('[data-filter="all"]');
+            if (defaultBtn) setActive(defaultBtn);
+            applyFilter('all');
+
+            filterBar.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-filter]');
+                if (!btn) return;
+                setActive(btn);
+                applyFilter(btn.getAttribute('data-filter'));
+            });
+        })();
     </script>
 
     <!-- WhatsApp Floating Chat -->
