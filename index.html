@@ -1,1338 +1,860 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imon Chowdhury - Full Stack Web Developer</title>
-    <link rel="shortcut icon" href="./image/favicon.jpg" type="image/x-icon">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Swiper CSS for slider -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-    <!-- External modern styles -->
-    <link rel="stylesheet" href="./styles.css">
-    <!-- Custom styles -->
-    <style>
-        /* Custom animations and additional styles */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imon Chowdhury — Full Stack Web Developer</title>
+  <meta name="description" content="Imon Chowdhury is a Full Stack Web Developer with 2+ years of experience in PHP, Laravel, React JS, Shopify & WordPress development based in Dhaka, Bangladesh.">
+  <link rel="shortcut icon" href="./image/favicon.jpg" type="image/x-icon">
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-            50% {
-                transform: translateY(-20px);
-            }
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out forwards;
-            opacity: 0;
-        }
-
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .skill-bar {
-            height: 8px;
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .skill-progress {
-            height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            transition: width 1.5s ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        .card-hover {
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: rgba(59, 130, 246, 0.5);
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-        }
-
-        .gradient-text {
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: gradient 3s ease infinite;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .nav-link {
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Free Courses UI tweaks */
-        .course-card {
-            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-            border: 1px solid rgba(255, 255, 255, .08);
-        }
-
-        .course-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
-            border-color: rgba(59, 130, 246, .45);
-        }
-
-        .thumb-wrap {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .thumb-wrap img {
-            transition: transform .5s ease;
-        }
-
-        .course-card:hover .thumb-wrap img {
-            transform: scale(1.06);
-        }
-
-        .yt-badge {
-            position: absolute;
-            top: .75rem;
-            left: .75rem;
-            padding: .25rem .5rem;
-            font-size: .7rem;
-            border-radius: .5rem;
-            background: rgba(239, 68, 68, .9);
-        }
-
-        .duration-badge {
-            position: absolute;
-            right: .75rem;
-            bottom: .75rem;
-            padding: .15rem .45rem;
-            font-size: .7rem;
-            border-radius: .35rem;
-            background: rgba(0, 0, 0, .65);
-        }
-
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .swiper-button-prev,
-        .swiper-button-next {
-            color: #93c5fd;
-            background: rgba(17, 24, 39, .6);
-            width: 42px;
-            height: 42px;
-            border-radius: 9999px;
-            backdrop-filter: blur(6px);
-        }
-
-        .swiper-button-prev::after,
-        .swiper-button-next::after {
-            font-size: 18px;
-        }
-
-        .swiper-button-prev:hover,
-        .swiper-button-next:hover {
-            color: #fff;
-            background: rgba(17, 24, 39, .85);
-        }
-
-        .swiper-pagination-bullet {
-            background: rgba(255, 255, 255, .35);
-            opacity: 1;
-        }
-
-        .swiper-pagination-bullet-active {
-            background: #60a5fa;
-        }
-    </style>
-    <!-- Tailwind Config -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3b82f6',
-                        secondary: '#1e40af',
-                        dark: '#1e293b',
-                    }
-                }
-            }
-        }
-    </script>
-<!-- Swiper JS for slider -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css">
 </head>
+<body>
 
-<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-gray-100 font-sans antialiased">
-    <!-- Navigation -->
-    <header class="fixed w-full glass-effect z-50 transition-all duration-300" id="navbar">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home"
-                class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Imon
-                Chowdhury</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="hover:text-primary transition-colors nav-link">Home</a>
-                <a href="#about" class="hover:text-primary transition-colors nav-link">About</a>
-                <a href="#skills" class="hover:text-primary transition-colors nav-link">Skills</a>
-                <a href="#courses" class="hover:text-primary transition-colors nav-link">Courses</a>
-                <a href="#experience" class="hover:text-primary transition-colors nav-link">Experience</a>
-                <a href="#projects" class="hover:text-primary transition-colors nav-link">Projects</a>
-                <a href="#contact" class="hover:text-primary transition-colors nav-link">Contact</a>
-            </div>
-            <button class="md:hidden focus:outline-none" id="menu-toggle">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </nav>
-        <!-- Mobile Menu -->
-        <div class="md:hidden hidden bg-black w-full" id="mobile-menu">
-            <div class="container mx-auto px-6 py-3 flex flex-col space-y-4">
-                <a href="#home" class="hover:text-primary transition-colors">Home</a>
-                <a href="#about" class="hover:text-primary transition-colors">About</a>
-                <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
-                <a href="#courses" class="hover:text-primary transition-colors">Courses</a>
-                <a href="#experience" class="hover:text-primary transition-colors">Experience</a>
-                <a href="#projects" class="hover:text-primary transition-colors">Projects</a>
-                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
-            </div>
+<!-- ─────────────────────────────── NAV ──────────────────────────────── -->
+<header id="navbar">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="#home" class="nav-logo">Imon Chowdhury</a>
+
+      <div class="nav-links">
+        <a href="#home"       class="nav-link active">Home</a>
+        <a href="#about"      class="nav-link">About</a>
+        <a href="#skills"     class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects"   class="nav-link">Projects</a>
+        <a href="#courses"    class="nav-link">Courses</a>
+        <a href="#contact"    class="nav-link">Contact</a>
+      </div>
+
+      <a href="#contact" class="btn btn-primary nav-cta">Hire Me</a>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="#home"       class="nav-link">Home</a>
+    <a href="#about"      class="nav-link">About</a>
+    <a href="#skills"     class="nav-link">Skills</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#projects"   class="nav-link">Projects</a>
+    <a href="#courses"    class="nav-link">Courses</a>
+    <a href="#contact"    class="nav-link">Contact</a>
+  </div>
+</header>
+
+
+<!-- ─────────────────────────────── HERO ─────────────────────────────── -->
+<section id="home">
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-blob-3"></div>
+
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Left -->
+      <div class="hero-text">
+        <div class="hero-badge"><i class="fa-solid fa-circle-check"></i> Available for Work</div>
+
+        <h1 class="hero-title">
+          Hi, I'm <span class="g-text">Imon<br>Chowdhury</span>
+        </h1>
+
+        <p class="hero-sub">
+          Full Stack Web Developer with <strong>2+ years</strong> of experience crafting modern, scalable web applications — from Laravel APIs to React UIs and Shopify apps.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact"  class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Hire Me</a>
+          <a href="#projects" class="btn btn-outline"><i class="fa-solid fa-briefcase"></i> View Work</a>
+          <a href="https://drive.google.com/file/d/1ezw3705cg82C35RxhPusKhnDZ6eCOepe/view?usp=sharing" target="_blank" class="btn btn-outline"><i class="fa-solid fa-download"></i> Resume</a>
         </div>
-    </header>
 
-    <!-- Home Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900">
-        <!-- Enhanced Animated Background Elements -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            <!-- Colorful Blobs -->
-            <div class="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 rounded-full opacity-40 blur-[120px] animate-blob"></div>
-            <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-br from-purple-600 via-pink-500 to-blue-400 rounded-full opacity-30 blur-[100px] animate-blob animation-delay-2000"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36rem] h-[36rem] bg-gradient-to-br from-pink-400 via-blue-400 to-purple-500 rounded-full opacity-20 blur-[160px] animate-blob animation-delay-4000"></div>
-            <!-- Sparkle Particles -->
-            <div class="absolute inset-0 pointer-events-none z-10">
-                <svg class="absolute top-1/4 left-1/3 animate-pulse" width="32" height="32" fill="none">
-                    <circle cx="16" cy="16" r="2" fill="#a78bfa" />
-                </svg>
-                <svg class="absolute bottom-1/4 right-1/4 animate-bounce" width="24" height="24" fill="none">
-                    <circle cx="12" cy="12" r="1.5" fill="#f472b6" />
-                </svg>
-                <svg class="absolute top-1/3 right-1/2 animate-spin-slow" width="20" height="20" fill="none">
-                    <circle cx="10" cy="10" r="1" fill="#60a5fa" />
-                </svg>
-            </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-val">2+</div>
+            <div class="hero-stat-label">Years Exp.</div>
+          </div>
+          <div>
+            <div class="hero-stat-val">10+</div>
+            <div class="hero-stat-label">Projects Done</div>
+          </div>
+          <div>
+            <div class="hero-stat-val">9</div>
+            <div class="hero-stat-label">Core Skills</div>
+          </div>
         </div>
-        <div class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center relative z-20">
-            <!-- Left: Text Content -->
-            <div class="md:w-1/2 text-center md:text-left mb-12 md:mb-0 animate-fadeIn">
-                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight drop-shadow-2xl">
-                    Hi, I'm <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-xl animate-gradient-x">Imon Chowdhury</span>
-                </h1>
-                <h2 class="text-2xl md:text-4xl font-semibold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 drop-shadow animate-gradient-x">
-                    <span class="inline-block animate-typewriter border-r-4 border-primary pr-2">Full Stack Web Developer</span>
-                </h2>
-                <p class="text-lg md:text-xl mb-10 text-gray-200 max-w-xl mx-auto md:mx-0 bg-white/5 rounded-xl px-6 py-4 shadow-lg backdrop-blur-md border border-white/10">
-                    <span class="font-semibold text-primary">Crafting</span> modern, <span class="font-semibold text-pink-400">responsive</span> web applications with <span class="font-semibold text-primary">2+ years</span> of experience.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                    <a href="#contact"
-                        class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-xl transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:ring-offset-2 animate-bounce-slow">
-                        <i class="fa-solid fa-paper-plane"></i> Hire Me
-                    </a>
-                    <a href="#projects"
-                        class="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-blue-500 hover:to-pink-500 hover:text-white font-bold py-3 px-8 rounded-full shadow-xl transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-400/50 focus:ring-offset-2">
-                        <i class="fa-solid fa-briefcase"></i> View Work
-                    </a>
-                </div>
-            </div>
-            <!-- Right: Profile Image with Glassmorphism Card and Neon Glow -->
-            <div class="md:w-1/2 flex justify-center animate-fadeIn" style="animation-delay: 0.3s">
-                <div class="relative group">
-                    <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 opacity-70 blur-2xl animate-pulse"></div>
-                    <div class="absolute inset-0 rounded-full border-4 border-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 opacity-60 animate-glow"></div>
-                    <div class="relative z-10 bg-white/10 backdrop-blur-2xl rounded-full p-3 shadow-2xl ring-4 ring-white/10 hover:ring-primary transition-all duration-300">
-                        <img src="./image/imon.jpg" alt="Profile Image"
-                            class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl border-4 border-white/20 animate-float transition-transform duration-300 group-hover:scale-110">
-                    </div>
-                </div>
-            </div>
+      </div>
+
+      <!-- Right -->
+      <div class="hero-img-wrap">
+        <div class="hero-img-ring" style="position:relative;">
+          <img src="./image/imon.jpg" alt="Imon Chowdhury — Full Stack Web Developer">
+
+          <!-- Float cards -->
+          <div class="hero-card-float hero-card-1">
+            <i class="fa-brands fa-laravel" style="color:#ef4444;"></i> Laravel Developer
+          </div>
+          <div class="hero-card-float hero-card-2">
+            <i class="fa-brands fa-shopify" style="color:#95bf47;"></i> Shopify Expert
+          </div>
         </div>
-        <!-- Custom Animations -->
-        <style>
-            @keyframes gradient-x {
-                0%, 100% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-            }
-            .animate-gradient-x {
-                background-size: 200% 200%;
-                animation: gradient-x 4s ease-in-out infinite;
-            }
-            @keyframes typewriter {
-                from { width: 0; }
-                to { width: 100%; }
-            }
-            .animate-typewriter {
-                display: inline-block;
-                overflow: hidden;
-                white-space: nowrap;
-                border-right: 4px solid #3b82f6;
-                animation: typewriter 2.5s steps(30, end) 1s 1 normal both;
-                max-width: 100%;
-            }
-            @keyframes glow {
-                0%, 100% { box-shadow: 0 0 32px 8px #a78bfa44, 0 0 64px 16px #f472b644; }
-                50% { box-shadow: 0 0 64px 16px #60a5fa66, 0 0 32px 8px #a78bfa44; }
-            }
-            .animate-glow {
-                animation: glow 3s ease-in-out infinite;
-            }
-            @keyframes bounce-slow {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-10px); }
-            }
-            .animate-bounce-slow {
-                animation: bounce-slow 2.5s infinite;
-            }
-            @keyframes spin-slow {
-                0% { transform: rotate(0deg);}
-                100% { transform: rotate(360deg);}
-            }
-            .animate-spin-slow {
-                animation: spin-slow 8s linear infinite;
-            }
-        </style>
-    </section>
+      </div>
 
-    <!-- Services Section -->
-    <section id="services" class="py-24 relative">
-        <div class="absolute inset-0 -z-10 bg-gradient-to-br from-gray-900/80 via-indigo-900/40 to-gray-900/80"></div>
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-extrabold text-center mb-4 gradient-text drop-shadow-lg tracking-tight">Pro Services</h2>
-            <p class="text-center text-gray-300 mb-14 text-lg">Premium gigs delivered with quality, speed and support.</p>
+    </div><!-- /hero-inner -->
+  </div>
+</section>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Service Card 1 -->
-                <article class="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-white/10 via-indigo-500/5 to-white/10 shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-white/10 hover:border-emerald-400/40" data-service-id="1">
-                    <div class="relative">
-                        <img src="./image/service1.webp" alt="WordPress Elementor Service"
-                            class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105">
-                        <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-blue-600/90 text-white shadow-md tracking-wide animate-bounce-slow">Popular</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <h3 class="font-semibold text-lg leading-snug text-white group-hover:text-emerald-400 transition-colors duration-200">I will create, redesign, clone WordPress website in Elementor pro</h3>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="flex items-center gap-1 text-yellow-400 font-medium">
-                                <i class="fa-solid fa-star"></i> 5.0 <span class="text-gray-400 font-normal">(12)</span>
-                            </span>
-                            <span class="text-gray-400 flex items-center gap-1"><i class="fa-regular fa-clock"></i> 2-5 days</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-gray-300">Price <span class="text-white font-bold">$80</span></span>
-                            <a href="service.html?id=1"
-                                class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow-md font-semibold transition-all duration-200 group-hover:scale-105">See
-                                Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                        </div>
-                    </div>
-                </article>
 
-                <!-- Service Card 2 -->
-                <article class="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-white/10 via-pink-500/5 to-white/10 shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-white/10 hover:border-pink-400/40" data-service-id="2">
-                    <div class="relative">
-                        <img src="./image/service2.webp" alt="WP bug fix" class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105">
-                        <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-pink-600/90 text-white shadow-md tracking-wide animate-bounce-slow">Express</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <h3 class="font-semibold text-lg leading-snug text-white group-hover:text-pink-400 transition-colors duration-200">I will solve your major WordPress issues, errors or bug fix</h3>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="flex items-center gap-1 text-yellow-400 font-medium">
-                                <i class="fa-solid fa-star"></i> 5.0 <span class="text-gray-400 font-normal">(12)</span>
-                            </span>
-                            <span class="text-gray-400 flex items-center gap-1"><i class="fa-regular fa-clock"></i> 1-2 days</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-gray-300">Price <span class="text-white font-bold">$5</span></span>
-                            <a href="service.html?id=2"
-                                class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-pink-600 hover:from-emerald-500 hover:to-pink-500 text-white text-sm px-4 py-2 rounded-lg shadow-md font-semibold transition-all duration-200 group-hover:scale-105">See
-                                Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                        </div>
-                    </div>
-                </article>
+<!-- ─────────────────────────────── ABOUT ────────────────────────────── -->
+<section id="about" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag"><i class="fa-regular fa-user"></i> Who I Am</div>
+      <h2 class="section-title">About <span>Me</span></h2>
+      <p class="section-sub">A passionate developer who turns ideas into powerful digital products.</p>
+    </div>
 
-                <!-- Service Card 3 -->
-                <article class="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-white/10 via-indigo-500/5 to-white/10 shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-white/10 hover:border-indigo-400/40" data-service-id="3">
-                    <div class="relative">
-                        <img src="./image/service3.webp" alt="Ecommerce Development" class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105">
-                        <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-indigo-600/90 text-white shadow-md tracking-wide animate-bounce-slow">Trending</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <h3 class="font-semibold text-lg leading-snug text-white group-hover:text-indigo-400 transition-colors duration-200">I will design or develop responsive blog or eCommerce website</h3>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="flex items-center gap-1 text-yellow-400 font-medium">
-                                <i class="fa-solid fa-star"></i> 5.0 <span class="text-gray-400 font-normal">(8)</span>
-                            </span>
-                            <span class="text-gray-400 flex items-center gap-1"><i class="fa-regular fa-clock"></i> 3-7 days</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-gray-300">Price <span class="text-white font-bold">$250</span></span>
-                            <a href="service.html?id=3"
-                                class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white text-sm px-4 py-2 rounded-lg shadow-md font-semibold transition-all duration-200 group-hover:scale-105">See
-                                Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Service Card 4 -->
-                <article class="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-white/10 via-teal-500/5 to-white/10 shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-white/10 hover:border-teal-400/40" data-service-id="4">
-                    <div class="relative">
-                        <img src="./image/service4.webp" alt="Landing Page" class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105">
-                        <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-teal-600/90 text-white shadow-md tracking-wide animate-bounce-slow">New</span>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <h3 class="font-semibold text-lg leading-snug text-white group-hover:text-teal-400 transition-colors duration-200">I will make sales product landing page for your business</h3>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="flex items-center gap-1 text-yellow-400 font-medium">
-                                <i class="fa-solid fa-star"></i> 5.0 <span class="text-gray-400 font-normal">(3)</span>
-                            </span>
-                            <span class="text-gray-400 flex items-center gap-1"><i class="fa-regular fa-clock"></i> 1 day</span>
-                        </div>
-                        <div class="flex items-center justify-between pt-2">
-                            <span class="text-gray-300">Price <span class="text-white font-bold">$20</span></span>
-                            <a href="service.html?id=4"
-                                class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-sm px-4 py-2 rounded-lg shadow-md font-semibold transition-all duration-200 group-hover:scale-105">See
-                                Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                        </div>
-                    </div>
-                </article>
-            </div>
+    <div class="about-grid reveal">
+      <!-- Image -->
+      <div class="about-img-wrap">
+        <div class="about-img-frame">
+          <img src="./image/imon.jpg" alt="Imon Chowdhury">
         </div>
-    </section>
-
-    <!-- My Free Courses (YouTube) -->
-    <section id="courses" class="py-28 relative overflow-hidden">
-        <!-- Modern animated background shapes -->
-        <div class="pointer-events-none absolute -top-32 -left-32 w-[32rem] h-[32rem] bg-gradient-to-br from-pink-500/40 via-purple-500/30 to-blue-500/40 rounded-full blur-[120px] animate-pulse-slow z-0"></div>
-        <div class="pointer-events-none absolute -bottom-40 right-0 w-[28rem] h-[28rem] bg-gradient-to-tr from-blue-500/30 via-emerald-400/30 to-purple-500/40 rounded-full blur-[100px] animate-pulse-slow z-0"></div>
-        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900/80 via-purple-900/30 to-gray-900/90"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-5xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-white drop-shadow-2xl tracking-tight animate-fadeIn">
-                <span class="inline-block align-middle animate-float">My Free Courses</span>
-                <span class="inline-block align-middle ml-3 animate-bounce text-pink-400 text-4xl md:text-5xl">🎓</span>
-            </h2>
-            <div class="mx-auto h-2 w-40 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mb-14 shadow-xl animate-fadeIn"></div>
-            <div class="glass-effect rounded-[2.5rem] p-10 md:p-14 shadow-3xl border border-purple-400/30 backdrop-blur-2xl transition-all duration-300 hover:scale-[1.025] hover:shadow-pink-400/30 animate-fadeIn">
-                <div class="swiper freeCoursesSwiper pb-14">
-                    <div class="swiper-wrapper" id="free-courses-slides">
-                        <!-- Slides injected by JS -->
-                    </div>
-                    <div class="swiper-pagination !bottom-4"></div>
-                    <div class="swiper-button-prev !text-pink-400 !hover:text-blue-400 !bg-white/10 !backdrop-blur-md !rounded-full !p-3 !shadow-lg transition-all duration-200"></div>
-                    <div class="swiper-button-next !text-pink-400 !hover:text-blue-400 !bg-white/10 !backdrop-blur-md !rounded-full !p-3 !shadow-lg transition-all duration-200"></div>
-                </div>
-            </div>
+        <div class="about-exp-badge">
+          <div class="about-exp-num">2+</div>
+          <div class="about-exp-label">Years of<br>Experience</div>
         </div>
-    </section>
+      </div>
 
-    <!-- Courses & Training Section -->
-    <section class="py-24 relative overflow-hidden">
-        <!-- Modern animated background shapes -->
-        <div class="pointer-events-none absolute -top-32 -left-32 w-[32rem] h-[32rem] bg-gradient-to-br from-pink-500/40 via-purple-500/30 to-blue-500/40 rounded-full blur-[120px] animate-pulse-slow z-0"></div>
-        <div class="pointer-events-none absolute -bottom-40 right-0 w-[28rem] h-[28rem] bg-gradient-to-tr from-blue-500/30 via-emerald-400/30 to-purple-500/40 rounded-full blur-[100px] animate-pulse-slow z-0"></div>
-        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900/80 via-purple-900/30 to-gray-900/90"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-5xl md:text-6xl font-black text-center mb-8 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-white drop-shadow-2xl tracking-tight animate-fadeIn">
-                <span class="inline-block align-middle animate-float">Courses & Training</span>
-                <span class="inline-block align-middle ml-3 animate-bounce text-pink-400 text-3xl md:text-4xl">📚</span>
-            </h2>
-            <div class="mx-auto h-2 w-32 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mb-14 shadow-xl animate-fadeIn"></div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <!-- Card 1 -->
-                <div class="relative group transition-transform duration-300 hover:scale-[1.025]">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-500/40 to-purple-600/40 rounded-2xl opacity-60 group-hover:opacity-100 blur-lg transition duration-200 -z-10"></div>
-                    <div class="glass-effect p-8 rounded-2xl shadow-2xl border border-blue-400/20 backdrop-blur-2xl transition-all duration-300 hover:shadow-blue-400/30">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 p-3 rounded-xl shadow-lg">
-                                <i class="fa-solid fa-code text-white text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white">Web Development with PHP, Laravel, Vue.js</h3>
-                        </div>
-                        <p class="text-sm text-purple-300 font-medium mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-building-columns"></i> Ostad LTD <span class="mx-2">•</span> 2024
-                        </p>
-                        <ul class="list-none text-gray-200 mt-4 space-y-3">
-                            <li class="flex items-start gap-2">
-                                <span class="mt-1 text-blue-400"><i class="fa-solid fa-check-circle"></i></span>
-                                <span>Built full-stack apps with Laravel and Vue.js</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-1 text-blue-400"><i class="fa-solid fa-check-circle"></i></span>
-                                <span>Covered REST patterns, auth, and deployment</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="relative group transition-transform duration-300 hover:scale-[1.025]">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-pink-500/40 to-purple-600/40 rounded-2xl opacity-60 group-hover:opacity-100 blur-lg transition duration-200 -z-10"></div>
-                    <div class="glass-effect p-8 rounded-2xl shadow-2xl border border-pink-400/20 backdrop-blur-2xl transition-all duration-300 hover:shadow-pink-400/30">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="bg-gradient-to-tr from-pink-500 via-purple-500 to-blue-500 p-3 rounded-xl shadow-lg">
-                                <i class="fa-brands fa-wordpress-simple text-white text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white">WordPress Development</h3>
-                        </div>
-                        <p class="text-sm text-pink-300 font-medium mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-chalkboard-user"></i> Learn with Hasin Hayder <span class="mx-2">•</span> 2020
-                        </p>
-                        <ul class="list-none text-gray-200 mt-4 space-y-3">
-                            <li class="flex items-start gap-2">
-                                <span class="mt-1 text-pink-400"><i class="fa-solid fa-check-circle"></i></span>
-                                <span>Theme & plugin development fundamentals</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-1 text-pink-400"><i class="fa-solid fa-check-circle"></i></span>
-                                <span>Performance, security, and best practices</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+      <!-- Content -->
+      <div class="about-content">
+        <h3 class="about-title">Full Stack <span class="g-text">Web Developer</span></h3>
+        <p class="about-desc">
+          I'm a Full Stack Web Developer based in Dhaka, Bangladesh, with a strong passion for building clean, responsive, and high-performance web applications. I specialize in PHP/Laravel for backend, React JS for frontend, and have hands-on experience with Shopify and WordPress ecosystems.
+        </p>
+        <p class="about-desc">
+          Currently working as a <strong>Junior Software Engineer</strong> at DevsNest LLC — a Bangladesh-based US startup — where I build Shopify apps, REST APIs, and collaborate with cross-functional teams.
+        </p>
+
+        <div class="about-info-grid">
+          <div class="about-info-item">
+            <div class="about-info-icon"><i class="fa-solid fa-user"></i></div>
+            <div>
+              <div class="about-info-label">Full Name</div>
+              <div class="about-info-val">Imon Chowdhury</div>
             </div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <div class="about-info-label">Email</div>
+              <div class="about-info-val">imonchowdhury6@gmail.com</div>
+            </div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-icon"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <div class="about-info-label">Phone</div>
+              <div class="about-info-val">01875349813</div>
+            </div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div class="about-info-label">Location</div>
+              <div class="about-info-val">Dhaka, Bangladesh</div>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-900/60 to-gray-900 -z-10"></div>
-        <div class="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-tr from-blue-500/30 via-purple-500/20 to-pink-500/30 rounded-full blur-3xl opacity-60 -z-10"></div>
-        <div class="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-br from-pink-500/20 via-blue-500/10 to-purple-500/30 rounded-full blur-2xl opacity-50 -z-10"></div>
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-extrabold text-center mb-20 relative inline-block mx-auto tracking-tight">
-                <span class="relative z-10 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">About Me</span>
-                <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-2/3 h-2 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur-sm"></span>
-            </h2>
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 mb-10 md:mb-0 relative group flex justify-center">
-                    <div class="absolute -inset-2 bg-gradient-to-tr from-blue-500/60 via-purple-500/40 to-pink-500/60 rounded-3xl opacity-80 group-hover:opacity-100 blur-xl transition duration-300"></div>
-                    <img src="./image/imon.jpg" alt="About Image"
-                        class="relative rounded-3xl shadow-2xl w-full max-w-xs md:max-w-md mx-auto border-4 border-white/10 group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-32 h-8 bg-gradient-to-r from-blue-400/40 via-purple-400/40 to-pink-400/40 rounded-full blur-lg"></div>
-                </div>
-                <div class="md:w-1/2 md:pl-10">
-                    <h3 class="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Full Stack Web Developer</h3>
-                    <p class="text-gray-200 mb-5 text-lg leading-relaxed">
-                        I am a passionate Full Stack Web Developer with <span class="font-semibold text-blue-400">2 years</span> of experience in building modern, responsive, and user-centric web applications. I specialize in both frontend and backend technologies, delivering seamless solutions from concept to deployment.
-                    </p>
-                    <p class="text-gray-300 mb-8 text-lg leading-relaxed">
-                        My expertise includes <span class="font-semibold text-purple-400">HTML, CSS, JavaScript, React JS, Tailwind CSS, Bootstrap, PHP, Laravel,</span> and <span class="font-semibold text-pink-400">MySQL</span>. I am also proficient in WordPress development and SEO optimization.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                        <div class="flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl p-4 shadow-sm">
-                            <span class="flex items-center justify-center w-10 h-10 bg-blue-500/20 rounded-full">
-                                <i class="fas fa-user text-blue-400 text-xl"></i>
-                            </span>
-                            <div>
-                                <p class="text-sm text-gray-400 font-semibold">Name</p>
-                                <p class="text-white font-medium">Imon Chowdhury</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-xl p-4 shadow-sm">
-                            <span class="flex items-center justify-center w-10 h-10 bg-pink-500/20 rounded-full">
-                                <i class="fas fa-envelope text-pink-400 text-xl"></i>
-                            </span>
-                            <div>
-                                <p class="text-sm text-gray-400 font-semibold">Email</p>
-                                <p class="text-white font-medium">imonchowdhury6@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-xl p-4 shadow-sm">
-                            <span class="flex items-center justify-center w-10 h-10 bg-purple-500/20 rounded-full">
-                                <i class="fas fa-map-marker-alt text-purple-400 text-xl"></i>
-                            </span>
-                            <div>
-                                <p class="text-sm text-gray-400 font-semibold">Location</p>
-                                <p class="text-white font-medium">Dhaka, Bangladesh</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 bg-gradient-to-r from-blue-500/10 to-pink-500/10 rounded-xl p-4 shadow-sm">
-                            <span class="flex items-center justify-center w-10 h-10 bg-blue-500/20 rounded-full">
-                                <i class="fas fa-phone text-blue-400 text-xl"></i>
-                            </span>
-                            <div>
-                                <p class="text-sm text-gray-400 font-semibold">Phone</p>
-                                <p class="text-white font-medium">01875349813</p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1ezw3705cg82C35RxhPusKhnDZ6eCOepe/view?usp=sharing"
-                        target="_blank"
-                        class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400/50">
-                        <i class="fas fa-download"></i> Download CV
-                    </a>
-                </div>
-            </div>
+        <a href="https://drive.google.com/file/d/1ezw3705cg82C35RxhPusKhnDZ6eCOepe/view?usp=sharing" target="_blank" class="btn btn-primary">
+          <i class="fa-solid fa-download"></i> Download CV
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────── SKILLS ───────────────────────────── -->
+<section id="skills" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag"><i class="fa-solid fa-code"></i> What I Know</div>
+      <h2 class="section-title">My <span>Skills</span></h2>
+      <p class="section-sub">A comprehensive toolkit built through real-world projects and continuous learning.</p>
+    </div>
+
+    <!-- Skill cards -->
+    <div class="skills-card-wrap reveal">
+      <!-- Frontend -->
+      <div class="card skill-category-card">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon fe"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="skill-cat-title">Frontend Development</div>
         </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 -z-10">
-            <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900"></div>
-            <div
-                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTIxIDIxdjE5aDE5VjIxek0wIDIxdjE5aDE5VjIxek0yMSAwaDE5djE5SDIxek0wIDBoMTl2MTlIMHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10">
-            </div>
-            <!-- Modern glassmorphism overlay -->
-            <div class="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-3xl pointer-events-none"></div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-html5" style="color:#e44d26;"></i> HTML / CSS</div>
+            <div class="skill-bar-pct">95%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div>
         </div>
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-4xl font-extrabold text-center mb-16 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent tracking-tight drop-shadow-lg">My Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- Frontend Card -->
-                <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/10 hover:scale-[1.02] transition-transform duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 shadow-lg">
-                            <i class="fas fa-laptop-code text-white text-2xl"></i>
-                        </span>
-                        <h3 class="text-2xl font-semibold text-white">Frontend Development</h3>
-                    </div>
-                    <div class="space-y-7">
-                        <!-- Skill Item -->
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fab fa-html5 text-orange-400"></i>HTML/CSS</span>
-                                <span class="text-sm text-blue-300 font-bold">95%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full shadow-md transition-all duration-700" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fab fa-js-square text-yellow-400"></i>JavaScript</span>
-                                <span class="text-sm text-blue-300 font-bold">90%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 rounded-full shadow-md transition-all duration-700" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fab fa-react text-cyan-400"></i>React JS</span>
-                                <span class="text-sm text-blue-300 font-bold">85%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 rounded-full shadow-md transition-all duration-700" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fas fa-wind text-blue-300"></i>Tailwind CSS</span>
-                                <span class="text-sm text-blue-300 font-bold">90%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full shadow-md transition-all duration-700" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fab fa-bootstrap text-purple-400"></i>Bootstrap</span>
-                                <span class="text-sm text-blue-300 font-bold">90%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 rounded-full shadow-md transition-all duration-700" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Backend Card -->
-                <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/10 hover:scale-[1.02] transition-transform duration-300">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 via-purple-500 to-blue-500 shadow-lg">
-                            <i class="fas fa-server text-white text-2xl"></i>
-                        </span>
-                        <h3 class="text-2xl font-semibold text-white">Backend Development</h3>
-                    </div>
-                    <div class="space-y-7">
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fab fa-php text-indigo-300"></i>PHP</span>
-                                <span class="text-sm text-pink-300 font-bold">85%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-pink-900/30 to-blue-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 rounded-full shadow-md transition-all duration-700" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fab fa-laravel text-red-400"></i>Laravel</span>
-                                <span class="text-sm text-pink-300 font-bold">80%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-pink-900/30 to-blue-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 rounded-full shadow-md transition-all duration-700" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fas fa-database text-yellow-300"></i>MySQL</span>
-                                <span class="text-sm text-pink-300 font-bold">85%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-pink-900/30 to-blue-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-400 rounded-full shadow-md transition-all duration-700" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fab fa-wordpress-simple text-blue-400"></i>WordPress</span>
-                                <span class="text-sm text-pink-300 font-bold">90%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-pink-900/30 to-blue-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full shadow-md transition-all duration-700" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-medium text-white flex items-center gap-2"><i class="fas fa-search text-green-300"></i>SEO</span>
-                                <span class="text-sm text-pink-300 font-bold">75%</span>
-                            </div>
-                            <div class="w-full h-3 bg-gradient-to-r from-pink-900/30 to-blue-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-green-300 via-pink-400 to-purple-400 rounded-full shadow-md transition-all duration-700" style="width: 75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-js-square" style="color:#f7df1e;"></i> JavaScript</div>
+            <div class="skill-bar-pct">85%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
         </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-24 relative">
-        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900/80 via-purple-900/40 to-gray-900/80"></div>
-        <div class="container mx-auto px-4 md:px-8">
-            <h2 class="text-5xl font-extrabold text-center mb-20 gradient-text tracking-tight">Work Experience</h2>
-            <div class="relative">
-                <!-- Modern Timeline Line -->
-                <div class="absolute left-6 md:left-1/2 h-full w-1 bg-gradient-to-b from-indigo-500/30 via-purple-400/30 to-pink-400/20 rounded-full shadow-lg transform md:-translate-x-1/2"></div>
-                <!-- Timeline Items -->
-                <div class="space-y-20">
-                    <!-- Experience 1 -->
-                    <div class="relative flex flex-col md:flex-row items-center group" data-animate>
-                        <!-- Timeline Dot -->
-                        <div class="absolute left-2 md:left-1/2 md:-translate-x-1/2 top-0 z-10">
-                            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-400 shadow-lg border-4 border-white/10 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-briefcase text-white text-lg"></i>
-                            </div>
-                        </div>
-                        <!-- Content Left -->
-                        <div class="flex-1 md:text-right md:pr-16 mb-8 md:mb-0">
-                            <div class="inline-block bg-gradient-to-r from-indigo-900/60 to-purple-900/40 rounded-2xl px-8 py-6 shadow-xl border border-white/10 backdrop-blur-md transition-all duration-300 group-hover:scale-105">
-                                <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 flex items-center gap-2">
-                                    Software Developer Intern
-                                    <span class="ml-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">Internship</span>
-                                </h3>
-                                <p class="text-blue-300 font-medium mb-1">Devsnest LLC — Dhaka</p>
-                                <p class="text-gray-400 text-sm mb-4">Mar 2025 - Aug 2025</p>
-                                <ul class="list-disc list-inside text-gray-200 space-y-2 mb-4">
-                                    <li>Built Shopify apps using Laravel, PHP, MySQL and Shopify GraphQL API.</li>
-                                    <li>Designed scalable REST APIs using PHP OOP, service classes and controllers.</li>
-                                    <li>Collaborated cross‑functionally with developers; strengthened teamwork skills.</li>
-                                </ul>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-200 border border-indigo-400/30">Laravel</span>
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-200 border border-purple-400/30">PHP</span>
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-pink-500/20 text-pink-200 border border-pink-400/30">MySQL</span>
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-200 border border-blue-400/30">Shopify GraphQL</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Spacer for timeline on mobile -->
-                        <div class="h-12 md:hidden"></div>
-                    </div>
-                    <!-- Experience 2 -->
-                    <div class="relative flex flex-col md:flex-row items-center group" data-animate>
-                        <!-- Timeline Dot -->
-                        <div class="absolute left-2 md:left-1/2 md:-translate-x-1/2 top-0 z-10">
-                            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-pink-400 via-purple-500 to-indigo-500 shadow-lg border-4 border-white/10 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-briefcase text-white text-lg"></i>
-                            </div>
-                        </div>
-                        <!-- Content Right -->
-                        <div class="flex-1 md:pl-16 w-full">
-                            <div class="inline-block bg-gradient-to-r from-pink-900/60 to-blue-900/40 rounded-2xl px-8 py-6 shadow-xl border border-white/10 backdrop-blur-md transition-all duration-300 group-hover:scale-105">
-                                <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 flex items-center gap-2">
-                                    Freelance Web Developer
-                                    <span class="ml-2 px-3 py-1 rounded-full text-xs font-semibold bg-pink-500/20 text-pink-300 border border-pink-400/30">Freelance</span>
-                                </h3>
-                                <p class="text-blue-300 font-medium mb-1">Bait Al Diafa General Trading Co. LLC — Dubai</p>
-                                <p class="text-gray-400 text-sm mb-4">Remote</p>
-                                <ul class="list-disc list-inside text-gray-200 space-y-2 mb-4">
-                                    <li>Built an end‑to‑end eCommerce website using WordPress + Elementor Pro.</li>
-                                    <li>Improved site performance, security and mobile responsiveness.</li>
-                                    <li>Delivered for HORECA supplier Bait Al Diafa General Trading Co. LLC (Dubai).</li>
-                                </ul>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-200 border border-blue-400/30">WordPress</span>
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-200 border border-purple-400/30">Elementor Pro</span>
-                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/20 text-green-200 border border-green-400/30">SEO</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Spacer for timeline on mobile -->
-                        <div class="h-12 md:hidden"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-react" style="color:#61dafb;"></i> React JS</div>
+            <div class="skill-bar-pct">82%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 relative">
-        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900/60 via-blue-900/20 to-gray-900/60"></div>
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">My Contribution</h2>
-            <!-- Filter Controls -->
-            <div id="project-filters" class="flex flex-wrap items-center justify-center gap-3 mb-8">
-                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="all">All</button>
-                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="shopify">Shopify App</button>
-                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="laravel">Laravel</button>
-                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="wordpress">WordPress</button>
-                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="html">HTML</button>
-                <button class="btn btn-outline px-4 py-2 rounded-full text-sm" data-filter="javascript">JavaScript</button>
-            </div>
-
-            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 4 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="shopify,laravel,php,graphql">
-                    <div class="project-overlay absolute inset-0 pointer-events-none"></div>
-                    <span
-                        class="absolute top-3 left-3 z-10 px-2 py-1 text-xs rounded-full bg-yellow-400/90 text-black font-semibold">Featured</span>
-                    <img src="https://cdn.shopify.com/app-store/listing_images/dd9b28d597f4d5df88157a0797e94bd8/promotional_image/CMT5tY7hgf4CEAE=.png"
-                        alt="Dynamatic Cart & Upsell Engine screenshot" class="w-full h-48 object-cover">
-                    <div class="project-content p-6">
-                        <h3 class="text-xl font-semibold mb-2">Dynamatic Cart & Upsell Engine</h3>
-                        <p class="text-gray-300 mb-4">Shopify app for smart cart drawer and in‑checkout/up-sell offers.
-                            Contributed to backend APIs, app embed, and admin UI.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">Shopify App</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">Laravel</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">PHP</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">GraphQL</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://apps.shopify.com/navidium-cart-and-upsells" target="_blank"
-                                class="btn btn-primary px-4 py-2 rounded-full"><i
-                                    class="fas fa-external-link-alt mr-2"></i>Live</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="laravel,php,mysql,bootstrap">
-                    <div class="project-overlay absolute inset-0 pointer-events-none"></div>
-                    <img src="./image/funnel.jpg" alt="Project 3" class="w-full h-48 object-cover">
-                    <div class="project-content p-6">
-                        <h3 class="text-xl font-semibold mb-2">Sales Funnel Builder</h3>
-                        <p class="text-gray-300 mb-4">Custom funnel builder for ecommerce with advanced filtering.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">Laravel</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">PHP</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">MySQL</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">Bootstrap</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://funnelor.envoydigitalbd.com/" target="_blank"
-                                class="btn btn-primary px-4 py-2 rounded-full"><i
-                                    class="fas fa-external-link-alt mr-2"></i>Live</a>
-                            <a href="#" class="btn btn-outline px-4 py-2 rounded-full"><i
-                                    class="fab fa-github mr-2"></i>Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 1 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="wordpress,elementor,css">
-                    <div class="project-overlay absolute inset-0 pointer-events-none"></div>
-                    <img src="./image/ecommerce.webp" alt="Project 1" class="w-full h-48 object-cover">
-                    <div class="project-content p-6">
-                        <h3 class="text-xl font-semibold mb-2">E-commerce Website</h3>
-                        <p class="text-gray-300 mb-4">Full-featured store with auth, catalog, cart and payments.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">WordPress</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">Elementor</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">CSS</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://boritta.com/" target="_blank"
-                                class="btn btn-primary px-4 py-2 rounded-full"><i
-                                    class="fas fa-external-link-alt mr-2"></i>Live</a>
-                            <a href="#" class="btn btn-outline px-4 py-2 rounded-full"><i
-                                    class="fab fa-github mr-2"></i>Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card relative rounded-xl overflow-hidden" data-animate data-tags="html,css,javascript,tailwind">
-                    <div class="project-overlay absolute inset-0 pointer-events-none"></div>
-                    <img src="./image/envoydigital.jpg" alt="Project 2" class="w-full h-48 object-cover">
-                    <div class="project-content p-6">
-                        <h3 class="text-xl font-semibold mb-2">Digital Product Website</h3>
-                        <p class="text-gray-300 mb-4">Responsive design with scroll animations and contact.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">HTML</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">CSS</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">JavaScript</span>
-                            <span class="px-3 py-1 rounded-full text-xs bg-white/10">Tailwind</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://envoydigitalbd.com/" target="_blank"
-                                class="btn btn-primary px-4 py-2 rounded-full"><i
-                                    class="fas fa-external-link-alt mr-2"></i>Live</a>
-                            <a href="#" class="btn btn-outline px-4 py-2 rounded-full"><i
-                                    class="fab fa-github mr-2"></i>Code</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fa-solid fa-wind" style="color:#06b6d4;"></i> Tailwind CSS</div>
+            <div class="skill-bar-pct">90%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 relative">
-        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-900/60 via-purple-900/20 to-gray-900/60"></div>
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Get In Touch</h2>
-            <div class="flex flex-col md:flex-row gap-8">
-                <div class="md:w-1/2">
-                    <div class="glass-effect p-8 rounded-2xl h-full">
-                        <h3 class="text-xl font-semibold mb-6">Contact Information</h3>
-                        <div class="space-y-5">
-                            <div class="flex items-start">
-                                <div
-                                    class="bg-primary/80 rounded-full w-10 h-10 flex items-center justify-center mr-4 shadow-lg">
-                                    <i class="fas fa-map-marker-alt text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Location</h4>
-                                    <p class="text-gray-300">Dhaka, Bangladesh</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div
-                                    class="bg-primary/80 rounded-full w-10 h-10 flex items-center justify-center mr-4 shadow-lg">
-                                    <i class="fas fa-envelope text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Email</h4>
-                                    <p class="text-gray-300">imonchowdhury6@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div
-                                    class="bg-primary/80 rounded-full w-10 h-10 flex items-center justify-center mr-4 shadow-lg">
-                                    <i class="fas fa-phone text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium">Phone</h4>
-                                    <p class="text-gray-300">01875349813</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <h4 class="font-medium mb-4">Follow Me</h4>
-                            <div class="flex space-x-4">
-                                <a href="https://www.linkedin.com/in/sajidimon"
-                                    class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"><i
-                                        class="fab fa-linkedin-in"></i></a>
-                                <a href="https://www.github.com/sajidimon"
-                                    class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"><i
-                                        class="fab fa-github"></i></a>
-                                <a href="https://www.facebook.com/sajidimon"
-                                    class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"><i
-                                        class="fab fa-facebook"></i></a>
-                                <a href="https://www.youtube.com/skillgori"
-                                    class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"><i
-                                        class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2 md:pl-2">
-                    <form id="contactForm" class="space-y-6 glass-effect rounded-2xl p-8">
-                        <!-- FormSubmit config -->
-                        <input type="hidden" name="_subject" value="New message from portfolio contact form">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="box">
-                        <!-- Optional: redirect after submit -->
-                        <input type="hidden" name="_next" value="https://sajidimon.github.io/#contact">
-                        <!-- Honeypot field to reduce spam -->
-                        <input type="text" name="_honey" style="display:none">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium mb-1">Name</label>
-                                <input type="text" id="name" name="name"
-                                    class="w-full px-4 py-3 rounded-md focus:outline-none" placeholder="Your Name"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                                <input type="email" id="email" name="email"
-                                    class="w-full px-4 py-3 rounded-md focus:outline-none" placeholder="Your Email"
-                                    required>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="subject" class="block text-sm font-medium mb-1">Subject</label>
-                            <input type="text" id="subject" name="subject"
-                                class="w-full px-4 py-3 rounded-md focus:outline-none" placeholder="Subject" required>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium mb-1">Message</label>
-                            <textarea id="message" name="message" rows="5"
-                                class="w-full px-4 py-3 rounded-md focus:outline-none" placeholder="Your Message"
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary py-3 px-8 rounded-full"><i
-                                class="fas fa-paper-plane mr-2"></i>Send Message</button>
-                    </form>
-                </div>
-            </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-bootstrap" style="color:#7952b3;"></i> Bootstrap</div>
+            <div class="skill-bar-pct">90%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
         </div>
-    </section>
+      </div>
 
-    <!-- Footer -->
-    <footer class="relative bg-dark text-white pt-14 pb-8">
-        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-                <!-- Brand -->
-                <div>
-                    <h3
-                        class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                        Imon Chowdhury</h3>
-                    <p class="text-gray-400 mt-2">Full Stack Web Developer</p>
-                    <div class="flex space-x-3 mt-4">
-                        <a href="https://www.linkedin.com/in/sajidimon"
-                            class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"
-                            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/sajidimon"
-                            class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"
-                            aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://facebook.com/sajidimon"
-                            class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"
-                            aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://youtube.com/skillgori"
-                            class="btn btn-primary w-10 h-10 rounded-full flex items-center justify-center"
-                            aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
-                        <li><a href="#skills" class="hover:text-white transition-colors">Skills</a></li>
-                        <li><a href="#courses" class="hover:text-white transition-colors">Courses</a></li>
-                        <li><a href="#experience" class="hover:text-white transition-colors">Experience</a></li>
-                        <li><a href="#projects" class="hover:text-white transition-colors">Projects</a></li>
-                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact -->
-                <div>
-                    <h4 class="font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt w-6 text-primary"></i> Dhaka,
-                            Bangladesh</li>
-                        <li class="flex items-center"><i class="fas fa-envelope w-6 text-primary"></i>
-                            imonchowdhury6@gmail.com</li>
-                        <li class="flex items-center"><i class="fas fa-phone w-6 text-primary"></i> 01875349813</li>
-                    </ul>
-                </div>
-            </div>
-
-            <hr class="border-gray-800 my-8">
-            <div class="flex flex-col md:flex-row items-center justify-between text-gray-400">
-                <p class="text-sm">&copy; 2025 Imon Chowdhury. All rights reserved.</p>
-                <a href="#home"
-                    class="mt-4 md:mt-0 inline-flex items-center text-sm hover:text-white transition-colors">
-                    <i class="fas fa-arrow-up mr-2"></i> Back to top
-                </a>
-            </div>
+      <!-- Backend -->
+      <div class="card skill-category-card">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon be"><i class="fa-solid fa-server"></i></div>
+          <div class="skill-cat-title">Backend & Tools</div>
         </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Smooth scrolling for all anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Adjust for header height
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Active link highlighting based on scroll position
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('nav a');
-
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-
-                if (window.pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('text-primary');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('text-primary');
-                }
-            });
-        });
-
-        // Make service cards fully clickable
-        document.querySelectorAll('[data-service-id]').forEach(card => {
-            card.addEventListener('click', (e) => {
-                // avoid double navigation when clicking the button
-                const isButton = e.target.closest('a');
-                if (isButton) return;
-                const id = card.getAttribute('data-service-id');
-                window.location.href = `service.html?id=${id}`;
-            });
-        });
-
-        // Free Courses slider: data and rendering
-        const ytCourses = [
-            // TODO: replace with your real video IDs/links
-            { title: 'WordPress Basic to Advanced', channel: 'Skillgori', views: '— views', duration: '2:06:17', videoId: 'f7bo-8_VKVE', url: 'https://www.youtube.com/watch?v=f7bo-8_VKVE' },
-            { title: 'WordPress Theme Development', channel: 'Skillgori', views: '— views', duration: '5:23:25', videoId: 'MhGXTkCmo6I', url: 'https://www.youtube.com/watch?v=MhGXTkCmo6I' },
-            { title: 'Earning From Google AdSense', channel: 'Skillgori', views: '— views', duration: '4:58:46', videoId: 'qxeqkvPK31U', url: 'https://www.youtube.com/watch?v=qxeqkvPK31U' },
-            { title: 'Ecommerce Site Development Crash Course', channel: 'Skillgori', views: '— views', duration: '3:41:56', videoId: 'F__LKEPd5F0', url: 'https://www.youtube.com/watch?v=F__LKEPd5F0' },
-            { title: 'Ecommerce Landing Page Design', channel: 'Skillgori', views: '— views', duration: '01:24:42', videoId: 'mzjOCUG6CWQ', url: 'https://www.youtube.com/watch?v=mzjOCUG6CWQ' }
-        ];
-
-        const slidesRoot = document.getElementById('free-courses-slides');
-        if (slidesRoot) {
-            slidesRoot.innerHTML = ytCourses.map(v => `
-                <div class=\"swiper-slide\">
-                    <article class=\"course-card rounded-xl overflow-hidden bg-white/5 h-full flex flex-col\">
-                        <div class=\"thumb-wrap\">
-                            <img src=\"https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg\" alt=\"${v.title}\" class=\"w-full h-48 object-cover\"/>
-                            <span class=\"yt-badge\"><i class=\"fa-brands fa-youtube mr-1\"></i>YouTube</span>
-                            <span class=\"duration-badge\">${v.duration || ''}</span>
-                            <button data-url=\"${v.url}\" class=\"absolute inset-0 flex items-center justify-center text-white/90 hover:text-white transition\" aria-label=\"Play on YouTube\">
-                                <span class=\"w-14 h-14 rounded-full bg-red-600/90 hover:bg-red-600 flex items-center justify-center shadow-lg\"><i class=\"fa-brands fa-youtube text-2xl\"></i></span>
-                            </button>
-                        </div>
-                        <div class=\"p-5 flex-1 flex flex-col\">
-                            <h3 class=\"font-semibold line-clamp-2\">${v.title}</h3>
-                            <div class=\"text-xs text-gray-300 mt-2 flex items-center gap-3\">
-                                <span class=\"inline-flex items-center gap-1\"><i class=\"fa-solid fa-circle-user text-blue-400\"></i>${v.channel || ''}</span>
-                                <span class=\"inline-flex items-center gap-1\"><i class=\"fa-solid fa-eye text-blue-400\"></i>${v.views || ''}</span>
-                            </div>
-                            <div class=\"mt-auto pt-3\">
-                                <a href=\"${v.url}\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white text-sm px-3 py-2 rounded-md\">Watch on YouTube <i class=\"fa-solid fa-arrow-up-right-from-square text-xs\"></i></a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            `).join('');
-
-            // Click overlay play button to open new tab
-            slidesRoot.addEventListener('click', (e) => {
-                const btn = e.target.closest('button[data-url]');
-                if (btn) window.open(btn.getAttribute('data-url'), '_blank');
-            });
-
-            // Init Swiper with improved visuals
-            new Swiper('.freeCoursesSwiper', {
-                loop: true,
-                speed: 700,
-                grabCursor: true,
-                centeredSlides: false,
-                effect: 'coverflow',
-                coverflowEffect: { rotate: 8, stretch: 0, depth: 120, modifier: 1, slideShadows: false },
-                autoplay: { delay: 2600, disableOnInteraction: false },
-                spaceBetween: 24,
-                pagination: { el: '.swiper-pagination', clickable: true },
-                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-                breakpoints: {
-                    0: { slidesPerView: 1.05, centeredSlides: true },
-                    640: { slidesPerView: 2, centeredSlides: false },
-                    1024: { slidesPerView: 3 }
-                }
-            });
-        }
-
-        // Projects Filtering
-        (function initProjectFilters() {
-            const filterBar = document.getElementById('project-filters');
-            const grid = document.getElementById('projects-grid');
-            if (!filterBar || !grid) return;
-
-            const buttons = filterBar.querySelectorAll('[data-filter]');
-            const cards = Array.from(grid.querySelectorAll('.project-card'));
-
-            const setActive = (btn) => {
-                buttons.forEach(b => b.classList.remove('bg-primary', 'text-white'));
-                btn.classList.add('bg-primary', 'text-white');
-            };
-
-            const applyFilter = (key) => {
-                const k = key.toLowerCase();
-                cards.forEach(card => {
-                    const tags = (card.getAttribute('data-tags') || '').toLowerCase();
-                    const match = k === 'all' || tags.split(',').map(s => s.trim()).includes(k);
-                    card.style.display = match ? '' : 'none';
-                });
-            };
-
-            // Default active = All
-            const defaultBtn = filterBar.querySelector('[data-filter="all"]');
-            if (defaultBtn) setActive(defaultBtn);
-            applyFilter('all');
-
-            filterBar.addEventListener('click', (e) => {
-                const btn = e.target.closest('[data-filter]');
-                if (!btn) return;
-                setActive(btn);
-                applyFilter(btn.getAttribute('data-filter'));
-            });
-        })();
-    </script>
-
-    <!-- WhatsApp Floating Chat -->
-    <a href="https://wa.me/8801875349813?text=Hi%20Imon%2C%20I%27m%20interested%20in%20your%20web%20development%20services."
-        target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 group"
-        aria-label="Chat on WhatsApp">
-        <div
-            class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg shadow-green-500/30 flex items-center justify-center text-white text-2xl transition-transform transform hover:scale-105">
-            <i class="fab fa-whatsapp"></i>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-php" style="color:#777bb3;"></i> PHP</div>
+            <div class="skill-bar-pct">88%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
         </div>
-        <span
-            class="absolute right-16 bottom-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">Chat
-            on WhatsApp</span>
-    </a>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-laravel" style="color:#ef4444;"></i> Laravel</div>
+            <div class="skill-bar-pct">85%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fa-solid fa-database" style="color:#f59e0b;"></i> MySQL</div>
+            <div class="skill-bar-pct">85%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-shopify" style="color:#95bf47;"></i> Shopify / GraphQL</div>
+            <div class="skill-bar-pct">80%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-meta">
+            <div class="skill-bar-name"><i class="fab fa-wordpress-simple" style="color:#3858e9;"></i> WordPress</div>
+            <div class="skill-bar-pct">92%</div>
+          </div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chip grid -->
+    <div class="skill-chip-grid reveal" style="margin-top:3rem;">
+      <div class="skill-chip">
+        <div class="skill-chip-icon">🐘</div>
+        <div class="skill-chip-name">PHP</div>
+        <div class="skill-chip-level">Advanced</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">🔴</div>
+        <div class="skill-chip-name">Laravel</div>
+        <div class="skill-chip-level">Advanced</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">🗄️</div>
+        <div class="skill-chip-name">MySQL</div>
+        <div class="skill-chip-level">Advanced</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">⚛️</div>
+        <div class="skill-chip-name">React JS</div>
+        <div class="skill-chip-level">Intermediate</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">🔗</div>
+        <div class="skill-chip-name">REST API</div>
+        <div class="skill-chip-level">Advanced</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">📊</div>
+        <div class="skill-chip-name">GraphQL API</div>
+        <div class="skill-chip-level">Intermediate</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">🛍️</div>
+        <div class="skill-chip-name">Shopify</div>
+        <div class="skill-chip-level">Intermediate</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">🌐</div>
+        <div class="skill-chip-name">WordPress</div>
+        <div class="skill-chip-level">Expert</div>
+      </div>
+      <div class="skill-chip">
+        <div class="skill-chip-icon">🐙</div>
+        <div class="skill-chip-name">Git & GitHub</div>
+        <div class="skill-chip-level">Proficient</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────── EXPERIENCE ───────────────────────── -->
+<section id="experience" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag"><i class="fa-solid fa-briefcase"></i> My Journey</div>
+      <h2 class="section-title">Work <span>Experience</span></h2>
+      <p class="section-sub">Real-world projects that shaped my skills and professional growth.</p>
+    </div>
+
+    <div class="timeline reveal">
+
+      <!-- Job 1 -->
+      <div class="timeline-item">
+        <div class="timeline-dot-wrap">
+          <div class="timeline-dot"><i class="fa-solid fa-briefcase"></i></div>
+        </div>
+        <div class="card timeline-card">
+          <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Feb 2025 – Mar 2026</div>
+          <div class="timeline-role">Junior Software Engineer</div>
+          <div class="timeline-company"><i class="fa-solid fa-building"></i> DevsNest LLC — Dhaka, Bangladesh</div>
+          <p style="font-size:.83rem;color:var(--text-soft);margin-bottom:.75rem;">DevsNest is a Bangladesh-based US startup helping e-commerce merchants across the globe.</p>
+          <ul class="timeline-desc">
+            <li>Built Shopify apps using Laravel, PHP, MySQL, and Shopify GraphQL API.</li>
+            <li>Built scalable REST APIs using PHP OOP, service classes, and controllers.</li>
+            <li>Collaborated cross-functionally with developers; strengthened teamwork skills.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="pill pill-primary">Laravel</span>
+            <span class="pill pill-primary">PHP</span>
+            <span class="pill pill-pink">Shopify GraphQL</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">REST API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="timeline-item">
+        <div class="timeline-dot-wrap">
+          <div class="timeline-dot" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">
+            <i class="fa-solid fa-laptop"></i>
+          </div>
+        </div>
+        <div class="card timeline-card">
+          <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Jul 2025 · Freelance</div>
+          <div class="timeline-role">Freelance Web Developer</div>
+          <div class="timeline-company"><i class="fa-solid fa-building"></i> Bait Al Diafa General Trading Co. LLC — Dubai, UAE</div>
+          <p style="font-size:.83rem;color:var(--text-soft);margin-bottom:.75rem;">HORECA equipment and supplies supplier established in 2013, serving hotel, restaurant, and catering sectors.</p>
+          <ul class="timeline-desc">
+            <li>Built an end-to-end eCommerce website using WordPress & Elementor Pro.</li>
+            <li>Increased website performance, security, and mobile responsiveness.</li>
+            <li>Delivered a fully optimized, mobile-responsive site from scratch.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="pill pill-green">WordPress</span>
+            <span class="pill pill-accent">Elementor Pro</span>
+            <span class="pill">WooCommerce</span>
+            <span class="pill">SEO</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+
+    <!-- Education -->
+    <div style="margin-top:4rem;">
+      <div class="section-header" style="margin-bottom:2rem;">
+        <div class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Background</div>
+        <h2 class="section-title">Education</h2>
+      </div>
+
+      <div class="edu-grid reveal">
+        <div class="card edu-card">
+          <div class="edu-icon"><i class="fa-solid fa-university"></i></div>
+          <div class="edu-degree">Master's in Human Resource</div>
+          <div class="edu-school">Jagannath University, Dhaka</div>
+          <div class="edu-period">2022 – 2023</div>
+          <div class="edu-gpa"><i class="fa-solid fa-star"></i> GPA 3.17</div>
+        </div>
+        <div class="card edu-card">
+          <div class="edu-icon"><i class="fa-solid fa-book-open"></i></div>
+          <div class="edu-degree">Bachelor's in Management Studies</div>
+          <div class="edu-school">Jagannath University, Dhaka</div>
+          <div class="edu-period">2018 – 2022</div>
+          <div class="edu-gpa"><i class="fa-solid fa-star"></i> GPA 3.01</div>
+        </div>
+        <div class="card edu-card">
+          <div class="edu-icon"><i class="fa-solid fa-school"></i></div>
+          <div class="edu-degree">HSC</div>
+          <div class="edu-school">Savar Model College</div>
+          <div class="edu-period">2016 – 2018</div>
+          <div class="edu-gpa"><i class="fa-solid fa-star"></i> GPA 4.50</div>
+        </div>
+        <div class="card edu-card">
+          <div class="edu-icon"><i class="fa-solid fa-pencil-ruler"></i></div>
+          <div class="edu-degree">SSC</div>
+          <div class="edu-school">Kalma Waz Ali Model School</div>
+          <div class="edu-period">2010 – 2015</div>
+          <div class="edu-gpa"><i class="fa-solid fa-star"></i> GPA 5.00</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────── PROJECTS ─────────────────────────── -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag"><i class="fa-solid fa-folder-open"></i> Portfolio</div>
+      <h2 class="section-title">My <span>Projects</span></h2>
+      <p class="section-sub">A selection of work built with modern technologies and best practices.</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="shopify">Shopify</button>
+      <button class="filter-btn" data-filter="laravel">Laravel</button>
+      <button class="filter-btn" data-filter="wordpress">WordPress</button>
+      <button class="filter-btn" data-filter="html">HTML/CSS</button>
+      <button class="filter-btn" data-filter="javascript">JavaScript</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="projects-grid reveal" id="projectsGrid">
+
+      <!-- Project 1 — Dynamatic Cart -->
+      <div class="card project-card" data-tags="shopify,laravel,php,graphql">
+        <div class="project-img">
+          <img src="https://cdn.shopify.com/app-store/listing_images/dd9b28d597f4d5df88157a0797e94bd8/promotional_image/CMT5tY7hgf4CEAE=.png" alt="Dynamatic Cart & Upsell Engine">
+          <span class="project-featured-tag">⭐ Featured</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Dynamatic Cart &amp; Upsell Engine</h3>
+          <p class="project-desc">Shopify app for smart cart drawer and in-checkout/up-sell offers. Contributed to backend APIs, app embed, and admin UI.</p>
+          <div class="project-tags">
+            <span class="pill pill-primary">Shopify</span>
+            <span class="pill pill-primary">Laravel</span>
+            <span class="pill">GraphQL</span>
+            <span class="pill">PHP</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://apps.shopify.com/navidium-cart-and-upsells" target="_blank" class="btn btn-primary">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 — Dominopress -->
+      <div class="card project-card" data-tags="laravel,php,javascript">
+        <div class="project-img">
+          <img src="./image/envoydigital.jpg" alt="Dominopress Marketplace">
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Dominopress — WordPress Plugin Marketplace</h3>
+          <p class="project-desc">Full marketplace built with Laravel 10 & React JS. Features custom dashboard, Freemius payment, AI live chat, and landing pages.</p>
+          <div class="project-tags">
+            <span class="pill pill-primary">Laravel 10</span>
+            <span class="pill">React JS</span>
+            <span class="pill">Freemius</span>
+            <span class="pill pill-accent">AI Chat</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://dominopress.com" target="_blank" class="btn btn-primary">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 — E-commerce WP -->
+      <div class="card project-card" data-tags="wordpress,elementor">
+        <div class="project-img">
+          <img src="./image/ecommerce.webp" alt="E-commerce Website">
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">HORECA E-commerce Website</h3>
+          <p class="project-desc">Full-featured e-commerce website for Bait Al Diafa — a Dubai-based HORECA supplier. Built with WordPress & Elementor Pro.</p>
+          <div class="project-tags">
+            <span class="pill pill-green">WordPress</span>
+            <span class="pill pill-accent">Elementor Pro</span>
+            <span class="pill">WooCommerce</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://boritta.com/" target="_blank" class="btn btn-primary">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 — Digital Product Site -->
+      <div class="card project-card" data-tags="html,css,javascript">
+        <div class="project-img">
+          <img src="./image/funnel.jpg" alt="Digital Product Website">
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Digital Product Landing Page</h3>
+          <p class="project-desc">Responsive landing page for a digital product site with smooth scroll animations and contact form integration.</p>
+          <div class="project-tags">
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+            <span class="pill">JavaScript</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://envoydigitalbd.com/" target="_blank" class="btn btn-primary">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /projects-grid -->
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────── SERVICES ─────────────────────────── -->
+<section id="services" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag"><i class="fa-solid fa-hand-sparkles"></i> What I Offer</div>
+      <h2 class="section-title">My <span>Services</span></h2>
+      <p class="section-sub">Premium services delivered with quality, speed, and dedicated support.</p>
+    </div>
+
+    <div class="services-grid reveal">
+
+      <article class="card service-card" onclick="window.location.href='service.html?id=1'">
+        <div class="service-card-img">
+          <img src="./image/service1.webp" alt="WordPress Elementor Service">
+          <span class="service-badge popular">Popular</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-title">WordPress Website Design with Elementor Pro</h3>
+          <div class="service-meta">
+            <span class="service-rating"><i class="fa-solid fa-star"></i> 5.0 <span style="color:var(--text-muted);font-weight:400;">(12)</span></span>
+            <span><i class="fa-regular fa-clock"></i> 2–5 days</span>
+          </div>
+          <div class="service-footer">
+            <div class="service-price">$80 <span>Starting</span></div>
+            <a href="service.html?id=1" class="btn btn-primary" style="font-size:.78rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Details <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card service-card" onclick="window.location.href='service.html?id=2'">
+        <div class="service-card-img">
+          <img src="./image/service2.webp" alt="WordPress Bug Fix">
+          <span class="service-badge express">Express</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-title">WordPress Bug Fix &amp; Issue Resolution</h3>
+          <div class="service-meta">
+            <span class="service-rating"><i class="fa-solid fa-star"></i> 5.0 <span style="color:var(--text-muted);font-weight:400;">(12)</span></span>
+            <span><i class="fa-regular fa-clock"></i> 1–2 days</span>
+          </div>
+          <div class="service-footer">
+            <div class="service-price">$5 <span>Starting</span></div>
+            <a href="service.html?id=2" class="btn btn-primary" style="font-size:.78rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Details <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card service-card" onclick="window.location.href='service.html?id=3'">
+        <div class="service-card-img">
+          <img src="./image/service3.webp" alt="E-commerce Development">
+          <span class="service-badge trending">Trending</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-title">Responsive Blog or E-commerce Website</h3>
+          <div class="service-meta">
+            <span class="service-rating"><i class="fa-solid fa-star"></i> 5.0 <span style="color:var(--text-muted);font-weight:400;">(8)</span></span>
+            <span><i class="fa-regular fa-clock"></i> 3–7 days</span>
+          </div>
+          <div class="service-footer">
+            <div class="service-price">$250 <span>Starting</span></div>
+            <a href="service.html?id=3" class="btn btn-primary" style="font-size:.78rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Details <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card service-card" onclick="window.location.href='service.html?id=4'">
+        <div class="service-card-img">
+          <img src="./image/service4.webp" alt="Landing Page">
+          <span class="service-badge new">New</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-title">Sales Product Landing Page for Business</h3>
+          <div class="service-meta">
+            <span class="service-rating"><i class="fa-solid fa-star"></i> 5.0 <span style="color:var(--text-muted);font-weight:400;">(3)</span></span>
+            <span><i class="fa-regular fa-clock"></i> 1 day</span>
+          </div>
+          <div class="service-footer">
+            <div class="service-price">$20 <span>Starting</span></div>
+            <a href="service.html?id=4" class="btn btn-primary" style="font-size:.78rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Details <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────── COURSES ───────────────────────────── -->
+<section id="courses" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag"><i class="fa-brands fa-youtube"></i> Free Courses</div>
+      <h2 class="section-title">Free <span>YouTube</span> Courses</h2>
+      <p class="section-sub">I share my knowledge for free. Watch my complete web development courses on YouTube.</p>
+    </div>
+
+    <div class="courses-swiper-wrap reveal">
+      <div class="swiper freeCourses">
+        <div class="swiper-wrapper" id="coursesSlides"></div>
+        <div class="swiper-pagination" style="bottom:0;"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+
+    <!-- Training / Courses taken -->
+    <div style="margin-top:4rem;" class="reveal">
+      <div class="section-header" style="margin-bottom:2rem;">
+        <div class="section-tag"><i class="fa-solid fa-book-open"></i> Training</div>
+        <h2 class="section-title">Courses &amp; <span>Training</span></h2>
+      </div>
+      <div class="training-grid">
+        <div class="card training-card">
+          <div class="training-icon php"><i class="fa-solid fa-code"></i></div>
+          <div class="training-title">Web Development with PHP, Laravel, Vue.js</div>
+          <div class="training-org"><i class="fa-solid fa-building-columns"></i> Ostad LTD &nbsp;·&nbsp; 2024</div>
+          <ul class="training-points">
+            <li><i class="fa-solid fa-circle-check"></i> Built full-stack apps with Laravel and Vue.js</li>
+            <li><i class="fa-solid fa-circle-check"></i> Covered REST patterns, auth, and deployment</li>
+            <li><i class="fa-solid fa-circle-check"></i> Advanced PHP OOP and design patterns</li>
+          </ul>
+        </div>
+        <div class="card training-card">
+          <div class="training-icon mern"><i class="fa-brands fa-react"></i></div>
+          <div class="training-title">MERN Stack Web Development</div>
+          <div class="training-org"><i class="fa-solid fa-building-columns"></i> Programming Hero &nbsp;·&nbsp; 2023</div>
+          <ul class="training-points">
+            <li><i class="fa-solid fa-circle-check"></i> MongoDB, Express, React JS, Node.js stack</li>
+            <li><i class="fa-solid fa-circle-check"></i> REST API design and JWT authentication</li>
+            <li><i class="fa-solid fa-circle-check"></i> Full-stack app deployment and CI/CD basics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────── CONTACT ───────────────────────────── -->
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag"><i class="fa-regular fa-envelope"></i> Get In Touch</div>
+      <h2 class="section-title">Contact <span>Me</span></h2>
+      <p class="section-sub">Have a project in mind? Let's build something great together.</p>
+    </div>
+
+    <div class="contact-grid reveal">
+
+      <!-- Info -->
+      <div class="card contact-info-card">
+        <div class="contact-info-title">Let's Talk</div>
+        <p class="contact-info-sub">I'm currently available for freelance work and full-time opportunities. Feel free to reach out!</p>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-val">Dhaka, Bangladesh</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val">imonchowdhury6@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-val">01875349813</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-brands fa-linkedin"></i></div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-val">linkedin.com/in/sajidimon</div>
+          </div>
+        </div>
+
+        <div class="contact-socials">
+          <a href="https://linkedin.com/in/sajidimon"  target="_blank" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/sajidimon"       target="_blank" class="social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://facebook.com/sajidimon"     target="_blank" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://youtube.com/skillgori"      target="_blank" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/8801875349813"        target="_blank" class="social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="card contact-form-card">
+        <form id="contactForm" action="https://formsubmit.co/imonchowdhury6@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New message from portfolio">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="_next" value="https://sajidimon.github.io/#contact">
+          <input type="text" name="_honey" style="display:none">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Imon Chowdhury" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Project inquiry..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────── FOOTER ───────────────────────────── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Imon Chowdhury</div>
+        <p class="footer-brand-desc">Full Stack Web Developer building scalable web apps with PHP, Laravel, React JS, Shopify & WordPress.</p>
+        <div class="footer-socials">
+          <a href="https://linkedin.com/in/sajidimon"  target="_blank" class="footer-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/sajidimon"       target="_blank" class="footer-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://facebook.com/sajidimon"     target="_blank" class="footer-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://youtube.com/skillgori"      target="_blank" class="footer-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#courses">Courses</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i> Dhaka, Bangladesh</div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i> imonchowdhury6@gmail.com</div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i> 01875349813</div>
+        <div class="footer-contact-item"><i class="fab fa-linkedin-in"></i> linkedin.com/in/sajidimon</div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <p>© 2025 Imon Chowdhury. All rights reserved.</p>
+      <a href="#home" class="footer-back-top"><i class="fa-solid fa-arrow-up"></i> Back to top</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- WhatsApp Float -->
+<div class="wa-float">
+  <span class="wa-tooltip">Chat on WhatsApp</span>
+  <a class="wa-btn" href="https://wa.me/8801875349813?text=Hi%20Imon%2C%20I%27m%20interested%20in%20your%20services." target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./script.js"></script>
 </body>
-
 </html>

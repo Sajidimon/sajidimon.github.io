@@ -1,286 +1,239 @@
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle with animation
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = menuToggle.querySelector('i');
-    
-    if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('fa-bars');
-            menuIcon.classList.toggle('fa-times');
-            menuIcon.classList.add('animate-spin-once');
-            
-            // Remove the animation class after it completes
-            setTimeout(() => {
-                menuIcon.classList.remove('animate-spin-once');
-            }, 300);
-        });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            });
-        });
-    }
-    
-    // Add animation class for menu icon spin
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes spinOnce {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .animate-spin-once {
-            animation: spinOnce 0.3s ease-out;
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Smooth scrolling for all anchor links with offset
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            
-            // Skip if it's a non-anchor link
-            if (targetId === '#') return;
-            
-            e.preventDefault();
-            
-            const targetElement = document.querySelector(targetId);
-            if (!targetElement) return;
-            
-            // Add active class to clicked link
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('text-primary');
-            });
-            this.classList.add('text-primary');
-            
-            // Smooth scroll to target
-            const headerOffset = 90;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-            
-            // Add hash to URL without jumping
-            history.pushState(null, null, targetId);
-        });
+/* ====================================================
+   script.js — Portfolio (Light Theme)
+   ==================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ─── Navbar scroll shadow ─── */
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+
+  /* ─── Hamburger / Mobile menu ─── */
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Close on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
     });
-    
-    // Active link highlighting based on scroll position with intersection observer
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.3
+  });
+
+
+  /* ─── Smooth scrolling with offset ─── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const id = this.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const offset = 80;
+      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      history.pushState(null, null, id);
+    });
+  });
+
+
+  /* ─── Active nav link on scroll ─── */
+  const sections  = document.querySelectorAll('section[id], footer[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+
+  const highlightNav = () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+    });
+  };
+
+  window.addEventListener('scroll', highlightNav, { passive: true });
+
+
+  /* ─── Reveal on scroll ─── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+  /* ─── Skill bar animation ─── */
+  const barObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target;
+        const width = fill.getAttribute('data-width');
+        if (width) {
+          setTimeout(() => { fill.style.width = width + '%'; }, 100);
+        }
+        obs.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.skill-bar-fill').forEach(fill => {
+    fill.style.width = '0%';
+    barObserver.observe(fill);
+  });
+
+
+  /* ─── Project filter ─── */
+  const filterBar   = document.querySelector('.filter-bar');
+  const projectGrid = document.getElementById('projectsGrid');
+
+  if (filterBar && projectGrid) {
+    const cards   = Array.from(projectGrid.querySelectorAll('.project-card'));
+    const buttons = Array.from(filterBar.querySelectorAll('.filter-btn'));
+
+    const applyFilter = key => {
+      const k = key.toLowerCase();
+      cards.forEach(card => {
+        const tags = (card.getAttribute('data-tags') || '').toLowerCase().split(',').map(s => s.trim());
+        const show = k === 'all' || tags.includes(k);
+        card.style.display = show ? '' : 'none';
+        if (show) {
+          card.style.animation = 'none';
+          card.offsetHeight; // reflow
+          card.style.animation = 'fadeUp .45s ease both';
+        }
+      });
     };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                document.querySelectorAll('nav a').forEach(link => {
-                    link.classList.remove('text-primary');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('text-primary');
-                    }
-                });
-                
-                // Add animation class to section
-                entry.target.classList.add('animate-fadeIn');
-                
-                // Remove observer after first animation
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all sections
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
+
+    filterBar.addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.getAttribute('data-filter'));
     });
-    
-    // Initialize first section as active
-    const firstSection = document.querySelector('section');
-    if (firstSection) {
-        firstSection.classList.add('animate-fadeIn');
-    }
-    
-    // Animate skill bars with Intersection Observer for better performance
-    const skillBars = document.querySelectorAll('.skill-progress');
-    const skillBarObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const width = entry.target.getAttribute('data-width');
-                if (width) {
-                    entry.target.style.width = width + '%';
-                    entry.target.style.opacity = '1';
-                }
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    // Observe all skill bars
-    skillBars.forEach(bar => {
-        bar.style.width = '0';
-        bar.style.opacity = '0';
-        bar.style.transition = 'width 1.5s ease-in-out, opacity 0.5s ease-in-out';
-        skillBarObserver.observe(bar);
+
+    applyFilter('all');
+  }
+
+
+  /* ─── Free Courses Swiper ─── */
+  const courses = [
+    { title: 'WordPress Basic to Advanced', channel: 'Skillgori', duration: '2:06:17', videoId: 'f7bo-8_VKVE', url: 'https://www.youtube.com/watch?v=f7bo-8_VKVE' },
+    { title: 'WordPress Theme Development', channel: 'Skillgori', duration: '5:23:25', videoId: 'MhGXTkCmo6I', url: 'https://www.youtube.com/watch?v=MhGXTkCmo6I' },
+    { title: 'Earning From Google AdSense', channel: 'Skillgori', duration: '4:58:46', videoId: 'qxeqkvPK31U', url: 'https://www.youtube.com/watch?v=qxeqkvPK31U' },
+    { title: 'Ecommerce Site Development Crash Course', channel: 'Skillgori', duration: '3:41:56', videoId: 'F__LKEPd5F0', url: 'https://www.youtube.com/watch?v=F__LKEPd5F0' },
+    { title: 'Ecommerce Landing Page Design', channel: 'Skillgori', duration: '1:24:42', videoId: 'mzjOCUG6CWQ', url: 'https://www.youtube.com/watch?v=mzjOCUG6CWQ' },
+  ];
+
+  const slidesRoot = document.getElementById('coursesSlides');
+  if (slidesRoot) {
+    slidesRoot.innerHTML = courses.map(v => `
+      <div class="swiper-slide" style="height:auto;">
+        <div class="course-card">
+          <div class="course-thumb">
+            <img src="https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+            <span class="yt-badge"><i class="fa-brands fa-youtube me-1"></i> YouTube</span>
+            <span class="course-duration">${v.duration}</span>
+            <div class="course-play-btn">
+              <span><i class="fa-brands fa-youtube"></i></span>
+            </div>
+          </div>
+          <div class="course-body">
+            <h3 class="course-title">${v.title}</h3>
+            <div class="course-meta">
+              <span><i class="fa-solid fa-circle-user" style="color:var(--primary);"></i> ${v.channel}</span>
+              <span><i class="fa-regular fa-clock" style="color:var(--primary);"></i> ${v.duration}</span>
+            </div>
+            <div class="course-cta">
+              <a href="${v.url}" target="_blank" rel="noopener noreferrer">Watch Free <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Play button click opens YouTube
+    slidesRoot.addEventListener('click', e => {
+      const thumb = e.target.closest('.course-thumb');
+      if (thumb) {
+        const card = thumb.closest('.course-card');
+        const link = card.querySelector('.course-cta a');
+        if (link) window.open(link.href, '_blank');
+      }
     });
-    
-    // Add parallax effect to hero section
-    const heroSection = document.querySelector('#home');
-    if (heroSection) {
-        window.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const x = (window.innerWidth / 2 - clientX) / 100;
-            const y = (window.innerHeight / 2 - clientY) / 100;
-            
-            const elements = heroSection.querySelectorAll('*');
-            elements.forEach((element, index) => {
-                const speed = (index + 1) * 0.1;
-                element.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-            });
-        });
-    }
-    
-    // Enhanced form submission with loading state and better UX
-    const contactForm = document.querySelector('#contact form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerHTML;
-            
-            // Show loading state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
-            
-            try {
-                // Simulate form submission (replace with actual fetch/axios call)
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Show success message
-                const successMessage = document.createElement('div');
-                successMessage.className = 'mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded relative';
-                successMessage.innerHTML = `
-                    <span class="block sm:inline">Thank you for your message! I'll get back to you soon.</span>
-                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                        <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <title>Close</title>
-                            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-                        </svg>
-                    </span>
-                `;
-                
-                // Remove any existing messages
-                const existingMessage = contactForm.querySelector('.mt-4');
-                if (existingMessage) {
-                    existingMessage.remove();
-                }
-                
-                contactForm.appendChild(successMessage);
-                contactForm.reset();
-                
-                // Auto-remove success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.style.opacity = '0';
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 300);
-                }, 5000);
-                
-            } catch (error) {
-                // Show error message
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded';
-                errorMessage.textContent = 'Something went wrong. Please try again later.';
-                
-                // Remove any existing messages
-                const existingMessage = contactForm.querySelector('.mt-4');
-                if (existingMessage) {
-                    existingMessage.remove();
-                }
-                
-                contactForm.appendChild(errorMessage);
-                
-            } finally {
-                // Reset button state
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-            }
-        });
-        
-        // Add input focus effects
-        const inputs = contactForm.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            // Add focus styles
-            input.addEventListener('focus', () => {
-                input.parentElement.classList.add('ring-2', 'ring-blue-500');
-            });
-            
-            // Remove focus styles
-            input.addEventListener('blur', () => {
-                input.parentElement.classList.remove('ring-2', 'ring-blue-500');
-            });
-        });
-    }
-    
-    // Add scroll reveal animation for elements with data-animate attribute
-    const animateOnScroll = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-fadeIn');
-                animateOnScroll.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    document.querySelectorAll('[data-animate]').forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        animateOnScroll.observe(element);
+
+    new Swiper('.freeCourses', {
+      loop: true,
+      speed: 600,
+      grabCursor: true,
+      spaceBetween: 20,
+      autoplay: { delay: 3000, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      breakpoints: {
+        0:    { slidesPerView: 1.1, centeredSlides: true },
+        640:  { slidesPerView: 2, centeredSlides: false },
+        1024: { slidesPerView: 3, centeredSlides: false },
+      },
     });
-    
-    // Add hover effect for project cards
-    document.querySelectorAll('.project-card').forEach(card => {
-        const content = card.querySelector('.project-content');
-        const overlay = card.querySelector('.project-overlay');
-        
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const angleX = (y - centerY) / 20;
-            const angleY = (centerX - x) / 20;
-            
-            card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-            
-            if (overlay) {
-                overlay.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.7) 100%)`;
-            }
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            if (overlay) {
-                overlay.style.background = 'rgba(0,0,0,0.5)';
-            }
-        });
+  }
+
+
+  /* ─── Contact form UX ─── */
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    // The form uses FormSubmit (action attribute), no JS override needed.
+    // Just add basic loading state on submit:
+    const submitBtn = document.getElementById('submitBtn');
+    contactForm.addEventListener('submit', () => {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
     });
+
+    // Input floating label effect (subtle border glow already in CSS)
+    contactForm.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('focus', () => input.parentElement.style.position = 'relative');
+      input.addEventListener('blur',  () => input.parentElement.style.position = '');
+    });
+  }
+
+
+  /* ─── Service cards — full card clickable ─── */
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.style.cursor = 'pointer';
+  });
+
+
+  /* ─── Typewriter for hero subtitle ─── */
+  const roles = ['Full Stack Developer', 'Laravel Expert', 'Shopify Developer', 'React JS Developer', 'WordPress Expert'];
+  const roleEl = document.getElementById('heroRole');
+  if (roleEl) {
+    let ri = 0, ci = 0, deleting = false;
+
+    const tick = () => {
+      const word = roles[ri];
+      roleEl.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+
+      let delay = deleting ? 60 : 100;
+      if (!deleting && ci === word.length + 1) { deleting = true; delay = 1600; }
+      if (deleting && ci < 0)                  { deleting = false; ri = (ri + 1) % roles.length; ci = 0; delay = 300; }
+      setTimeout(tick, delay);
+    };
+    setTimeout(tick, 800);
+  }
+
 });
